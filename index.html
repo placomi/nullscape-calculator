@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Nullscape Upgrade Calculator</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <h2>Nullscape Upgrade Calculator</h2>
+  <p>meow mrrp meowwwwww meow</p>
+
+  <form autocomplete="off" onsubmit="return false">
+  <h3>Initial settings</h3>
+  <p>
+    Player cap: <input id="cap" type="number" min="1" max="20" value="1" autocomplete="off">
+    Difficulty:
+    <select id="difficulty" autocomplete="off">
+      <option>Casual</option>
+      <option selected>Normal</option>
+      <option>Extreme</option>
+    </select>
+  </p>
+
+  <h3>Run state</h3>
+  <p>
+    Level: <input id="level" type="number" min="0" value="1" autocomplete="off">
+    Current players: <input id="players" type="number" min="1" max="20" value="1" autocomplete="off">
+    Gold Gifts: <input id="money" type="number" min="0" value="0" autocomplete="off">
+  </p>
+  </form>
+
+  <p>
+    <button id="lock" type="button">Lock pending as current</button>
+    <button id="clear" type="button">Clear all selections</button>
+    <button id="reset" type="button">Reset run</button>
+  </p>
+
+  <p id="lobby"></p>
+  <p id="status"></p>
+
+  <h3>Upgrades</h3>
+  <table id="list">
+    <thead>
+      <tr>
+        <th>Upgrade</th>
+        <th>Level</th>
+        <th>Base</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script src="app.js"></script>
+</body>
+</html>

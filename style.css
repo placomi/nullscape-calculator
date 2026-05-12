@@ -1,0 +1,79 @@
+:root {
+  --bg0: #282828;
+  --bg1: #32302f;
+  --bg2: #3c3836;
+  --bg3: #504945;
+  --fg: #d4be98;
+  --fg-dim: #a89984;
+  --red: #ea6962;
+  --green: #a9b665;
+  --yellow: #d8a657;
+  --blue: #7daea3;
+  --orange: #e78a4e;
+  --dark: #1d2021;
+  --purple: #d3869b;
+}
+
+body {
+  background: var(--bg0);
+  color: var(--fg);
+}
+a {
+  color: var(--blue);
+}
+h2 {
+  color: var(--purple);
+}
+h3 {
+  color: var(--purple);
+}
+input,
+select,
+button {
+  background: var(--bg1);
+  color: var(--fg);
+  border: 1px solid var(--bg3);
+  padding: 3px 6px;
+  font: inherit;
+}
+button {
+  cursor: pointer;
+}
+button:hover {
+  border-color: var(--fg);
+}
+table {
+  border-collapse: collapse;
+  width: 50%;
+}
+th,
+td {
+  padding: 6px 10px;
+  border: 1px solid var(--bg3);
+  text-align: left;
+}
+th {
+  background: var(--bg1);
+  color: var(--fg-dim);
+}
+tbody tr {
+  cursor: pointer;
+  background: var(--bg0);
+  color: var(--fg);
+}
+tbody tr:hover {
+  outline: 2px solid var(--fg);
+  outline-offset: -2px;
+}
+tbody tr.pending {
+  background: var(--blue);
+  color: var(--dark);
+}
+tbody tr.locked {
+  background: var(--green);
+  color: var(--dark);
+}
+td.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}

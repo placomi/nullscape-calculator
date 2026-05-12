@@ -1,0 +1,261 @@
+{
+	"in_game": [
+		{
+			"name": "Better Jump Pads",
+			"level": 5,
+			"base_price": 50
+		},
+		{
+			"name": "Paycheck",
+			"level": 3,
+			"base_price": 55,
+			"max_stack": 5
+		},
+		{
+			"name": "Business License",
+			"level": 3,
+			"base_price": 75,
+			"max_stack": 2,
+			"stack_prices": [
+				75,
+				187.5
+			]
+		},
+		{
+			"name": "Swiftness Ring",
+			"level": 3,
+			"base_price": 80,
+			"max_stack": 3
+		},
+		{
+			"name": "Grapple Points",
+			"level": 5,
+			"base_price": 100
+		},
+		{
+			"name": "Medal",
+			"level": 5,
+			"base_price": 100
+		},
+		{
+			"name": "Tria Orbs",
+			"level": 5,
+			"base_price": 100
+		},
+		{
+			"name": "Double Jump",
+			"level": 5,
+			"base_price": 150
+		},
+		{
+			"name": "Radar",
+			"level": 5,
+			"base_price": 175
+		},
+		{
+			"name": "Radar Module: Enemies",
+			"level": 8,
+			"base_price": 200,
+			"requires": [
+				"Radar"
+			]
+		},
+		{
+			"name": "Fanny Pack",
+			"level": 8,
+			"base_price": 300
+		},
+		{
+			"name": "Grace Wings",
+			"level": 8,
+			"base_price": 300,
+			"solo_base_price": 200
+		},
+		{
+			"name": "Pocket Bell",
+			"level": 8,
+			"base_price": 300,
+			"requires": [
+				"Double Jump"
+			]
+		},
+		{
+			"name": "Radar Module: Altars",
+			"level": 8,
+			"base_price": 300,
+			"requires": [
+				"Radar"
+			]
+		},
+		{
+			"name": "Ice Skates",
+			"level": 8,
+			"base_price": 400,
+			"solo_base_price": 300
+		},
+		{
+			"name": "Helmet",
+			"level": 8,
+			"base_price": 400
+		},
+		{
+			"name": "Advanced Gravity Coil",
+			"level": 8,
+			"base_price": 600
+		},
+		{
+			"name": "More Altars",
+			"level": 10,
+			"base_price": 600
+		},
+		{
+			"name": "Larger Grapple Points",
+			"level": 13,
+			"base_price": 500,
+			"requires": [
+				"Grapple Points"
+			]
+		},
+		{
+			"name": "Ninja Belt",
+			"level": 13,
+			"base_price": 700,
+			"solo_base_price": 500
+		},
+		{
+			"name": "Radar Module: Instruments",
+			"level": 15,
+			"base_price": 1000,
+			"requires": [
+				"Radar"
+			]
+		},
+		{
+			"name": "Shark Tail",
+			"level": 15,
+			"base_price": 1200
+		},
+		{
+			"name": "Sport Shoes",
+			"level": 15,
+			"base_price": 1350
+		},
+		{
+			"name": "Gift Magnet",
+			"level": 15,
+			"base_price": 1500,
+			"max_stack": 3,
+			"stack_prices": [
+				1500,
+				2100,
+				2700
+			]
+		},
+		{
+			"name": "Matrix Tetrahedron",
+			"level": 15,
+			"base_price": 2500
+		},
+		{
+			"name": "Shield",
+			"level": 15,
+			"base_price": 4000,
+			"solo_base_price": 1000
+		},
+		{
+			"name": "Panic Necklace",
+			"level": 18,
+			"base_price": 3000,
+			"requires": [
+				"Shield"
+			]
+		},
+		{
+			"name": "Miniature Hourglass",
+			"level": 20,
+			"base_price": 3000
+		},
+		{
+			"name": "Gift Idol",
+			"level": 20,
+			"base_price": 4000,
+			"max_stack": 5,
+			"stack_prices": [
+				4000,
+				8000,
+				12000,
+				16000,
+				20000
+			]
+		},
+		{
+			"name": "Drowned Ægis",
+			"level": 20,
+			"base_price": 6000,
+			"requires": [
+				"More Altars"
+			]
+		}
+	],
+	"exclusive": [
+		{
+			"name": "Orb",
+			"level": 0,
+			"base_price": 0,
+			"note": "Free; Casual difficulty replacement for Tripmine upgrades"
+		},
+		{
+			"name": "Adrenaline",
+			"level": 3,
+			"base_price": 50,
+			"note": "Replaces Last Robloxian Standing in Solo/Duo"
+		},
+		{
+			"name": "Defuse Kit",
+			"level": 5,
+			"base_price": 30,
+			"max_stack": 3
+		},
+		{
+			"name": "Radar Module: Players",
+			"level": 8,
+			"base_price": 150,
+			"requires": [
+				"Radar"
+			]
+		},
+		{
+			"name": "Last Robloxian Standing",
+			"level": 8,
+			"base_price": 200
+		},
+		{
+			"name": "Radar Module: Tripmines",
+			"level": 8,
+			"base_price": 400,
+			"requires": [
+				"Radar"
+			]
+		},
+		{
+			"name": "Subspacial Barrier",
+			"level": 10,
+			"base_price": 1000,
+			"max_stack": 2,
+			"stack_prices": [
+				1000,
+				3000
+			],
+			"solo_stack_prices": [
+				500,
+				1500
+			],
+			"requires": [
+				{
+					"name": "Defuse Kit",
+					"count": 3
+				}
+			]
+		}
+	]
+}
