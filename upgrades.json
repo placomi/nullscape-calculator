@@ -120,7 +120,8 @@
 			"name": "Ninja Belt",
 			"level": 13,
 			"base_price": 700,
-			"solo_base_price": 500
+			"solo_base_price": 500,
+			"casual_base_price": 500
 		},
 		{
 			"name": "Radar Module: Instruments",
@@ -133,12 +134,14 @@
 		{
 			"name": "Shark Tail",
 			"level": 15,
-			"base_price": 1200
+			"base_price": 1200,
+			"casual_base_price": 800
 		},
 		{
 			"name": "Sport Shoes",
 			"level": 15,
-			"base_price": 1350
+			"base_price": 1350,
+			"casual_base_price": 1000
 		},
 		{
 			"name": "Gift Magnet",
@@ -149,23 +152,31 @@
 				1500,
 				2100,
 				2700
+			],
+			"casual_stack_prices": [
+				750,
+				1050,
+				1350
 			]
 		},
 		{
 			"name": "Matrix Tetrahedron",
 			"level": 15,
-			"base_price": 2500
+			"base_price": 2500,
+			"casual_base_price": 1500
 		},
 		{
 			"name": "Shield",
 			"level": 15,
 			"base_price": 4000,
-			"solo_base_price": 1000
+			"solo_base_price": 1000,
+			"casual_base_price": 2000
 		},
 		{
 			"name": "Panic Necklace",
 			"level": 18,
 			"base_price": 3000,
+			"casual_base_price": 1500,
 			"requires": [
 				"Shield"
 			]
@@ -173,7 +184,8 @@
 		{
 			"name": "Miniature Hourglass",
 			"level": 20,
-			"base_price": 3000
+			"base_price": 3000,
+			"casual_base_price": 1500
 		},
 		{
 			"name": "Gift Idol",
@@ -186,12 +198,20 @@
 				12000,
 				16000,
 				20000
+			],
+			"casual_stack_prices": [
+				3000,
+				6000,
+				9000,
+				12000,
+				15000
 			]
 		},
 		{
 			"name": "Drowned Ægis",
 			"level": 20,
 			"base_price": 6000,
+			"casual_base_price": 4000,
 			"requires": [
 				"More Altars"
 			]

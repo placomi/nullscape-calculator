@@ -41,7 +41,15 @@ function scaledPrice(base, players, lobby, difficulty) {
   return p;
 }
 
-function effectiveBase(upgrade, lobby, stackIndex) {
+function effectiveBase(upgrade, lobby, stackIndex, difficulty) {
+  if (
+    difficulty === "Casual" &&
+    Array.isArray(upgrade.casual_stack_prices) &&
+    stackIndex >= 1 &&
+    stackIndex <= upgrade.casual_stack_prices.length
+  ) {
+    return upgrade.casual_stack_prices[stackIndex - 1];
+  }
   if (
     lobby === "Solo" &&
     Array.isArray(upgrade.solo_stack_prices) &&
@@ -56,6 +64,9 @@ function effectiveBase(upgrade, lobby, stackIndex) {
     stackIndex <= upgrade.stack_prices.length
   ) {
     return upgrade.stack_prices[stackIndex - 1];
+  }
+  if (difficulty === "Casual" && typeof upgrade.casual_base_price === "number") {
+    return upgrade.casual_base_price;
   }
   if (lobby === "Solo" && typeof upgrade.solo_base_price === "number") {
     return upgrade.solo_base_price;
@@ -82,6 +93,7 @@ function isVisible(upgrade, lobby, difficulty) {
   if (upgrade.name === "Orb") return false;
   if (difficulty === "Casual" && TRIPMINE_RELATED.has(upgrade.name))
     return false;
+  if (difficulty === "Casual" && upgrade.name === "Grace Wings") return false;
   const soloOrDuo = lobby === "Solo" || lobby === "Duo";
   if (soloOrDuo && upgrade.name === "Last Robloxian Standing") return false;
   if (!soloOrDuo && upgrade.name === "Adrenaline") return false;
@@ -106,7 +118,7 @@ function visibleRows() {
     const shops = shopsFromLevel(upgrade.level, state.level);
     if (shops <= 0) continue;
 
-    const firstBase = effectiveBase(upgrade, lobby, 1);
+    const firstBase = effectiveBase(upgrade, lobby, 1, state.difficulty);
     const firstPrice = scaledPrice(
       firstBase,
       state.players,
@@ -167,7 +179,7 @@ function totalPendingCost() {
     if (!isVisible(u, lobby, state.difficulty)) continue;
 
     for (const i of pending) {
-      const base = effectiveBase(u, lobby, i);
+      const base = effectiveBase(u, lobby, i, state.difficulty);
       total += scaledPrice(base, state.players, lobby, state.difficulty);
     }
   }
@@ -264,7 +276,7 @@ function render() {
       if (locked && locked.has(i)) tr.classList.add("locked");
       else if (pending && pending.has(i)) tr.classList.add("pending");
 
-      const base = effectiveBase(r.upgrade, lobby, i);
+      const base = effectiveBase(r.upgrade, lobby, i, state.difficulty);
       const price = scaledPrice(base, state.players, lobby, state.difficulty);
 
       const nameCell = document.createElement("td");
