@@ -36,10 +36,10 @@ function lobbyType(cap) {
 }
 
 function scaledPrice(base, players, lobby, difficulty) {
-  let p = Math.ceil(base * Math.sqrt(players));
-  if (lobby === "Party+") p = Math.ceil(p / 1.125);
-  if (difficulty === "Extreme") p = Math.ceil(p * 1.15);
-  return p;
+  let p = base * Math.sqrt(players);
+  if (lobby === "Party+") p = p / 1.125;
+  if (difficulty === "Extreme") p = p * 1.15;
+  return Math.ceil(p);
 }
 
 function effectiveBase(upgrade, lobby, stackIndex, difficulty) {
