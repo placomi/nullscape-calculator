@@ -90,6 +90,13 @@ function maxStack(upgrade) {
     : 1;
 }
 
+function freeStacks(upgrade, lobby) {
+  if (upgrade.name === "Paycheck" && (lobby === "Solo" || lobby === "Duo")) {
+    return 1;
+  }
+  return 0;
+}
+
 function isCompatible(upgrade, lobby, difficulty) {
   if (upgrade.name === "Orb") return false;
   if (difficulty === "Casual" && TRIPMINE_RELATED.has(upgrade.name))
@@ -161,7 +168,7 @@ function visibleRows() {
   return rows;
 }
 
-function visibleStackCount(name, max, shops) {
+function visibleStackCount(name, max, shops, free = 0) {
   if (max <= 1) return 1;
 
   const locked = state.locked[name];
@@ -175,9 +182,9 @@ function visibleStackCount(name, max, shops) {
   }
 
   const active = (locked ? locked.size : 0) + (pending ? pending.size : 0);
-  const want = Math.max(1, maxIdx, active + 1);
+  const want = Math.max(free + 1, maxIdx, active + free + 1);
 
-  return Math.min(max, shops, want);
+  return Math.min(max, shops + free, want);
 }
 
 function totalPendingCost() {
@@ -280,8 +287,9 @@ function render() {
   const tbody = $("list").querySelector("tbody");
   tbody.innerHTML = "";
   for (const row of rows) {
+    const free = freeStacks(row.upgrade, lobby);
     if (!row.available) {
-      for (let i = 1; i <= row.maxStack; i++) {
+      for (let i = free + 1; i <= row.maxStack; i++) {
         const tr = document.createElement("tr");
         tr.classList.add("unavailable");
         const base = effectiveBase(row.upgrade, lobby, i, state.difficulty);
@@ -309,10 +317,10 @@ function render() {
       continue;
     }
 
-    const visibleN = visibleStackCount(row.name, row.maxStack, row.shops);
+    const visibleN = visibleStackCount(row.name, row.maxStack, row.shops, free);
     const locked = state.locked[row.name];
     const pending = state.pending[row.name];
-    for (let i = 1; i <= visibleN; i++) {
+    for (let i = free + 1; i <= visibleN; i++) {
       const tr = document.createElement("tr");
       if (locked && locked.has(i)) tr.classList.add("locked");
       else if (pending && pending.has(i)) tr.classList.add("pending");
