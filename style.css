@@ -73,6 +73,14 @@ tbody tr.locked {
   background: var(--green);
   color: var(--dark);
 }
+tbody tr.unavailable {
+  color: var(--fg-dim);
+  opacity: 0.5;
+  cursor: default;
+}
+tbody tr.unavailable:hover {
+  outline: none;
+}
 td.num {
   text-align: right;
   font-variant-numeric: tabular-nums;

@@ -18,6 +18,7 @@ const state = {
   locked: {},
   pending: {},
   everLocked: {},
+  showAll: false,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -89,7 +90,7 @@ function maxStack(upgrade) {
     : 1;
 }
 
-function isVisible(upgrade, lobby, difficulty) {
+function isCompatible(upgrade, lobby, difficulty) {
   if (upgrade.name === "Orb") return false;
   if (difficulty === "Casual" && TRIPMINE_RELATED.has(upgrade.name))
     return false;
@@ -97,15 +98,24 @@ function isVisible(upgrade, lobby, difficulty) {
   const soloOrDuo = lobby === "Solo" || lobby === "Duo";
   if (soloOrDuo && upgrade.name === "Last Robloxian Standing") return false;
   if (!soloOrDuo && upgrade.name === "Adrenaline") return false;
-  if (Array.isArray(upgrade.requires)) {
-    for (const dep of upgrade.requires) {
-      const depName = typeof dep === "string" ? dep : dep.name;
-      const need = typeof dep === "string" ? 1 : dep.count || 1;
-      const locked = state.locked[depName];
-      if (!locked || locked.size < need) return false;
-    }
+  return true;
+}
+
+function requiresMet(upgrade) {
+  if (!Array.isArray(upgrade.requires)) return true;
+  for (const dep of upgrade.requires) {
+    const depName = typeof dep === "string" ? dep : dep.name;
+    const need = typeof dep === "string" ? 1 : dep.count || 1;
+    const locked = state.locked[depName];
+    if (!locked || locked.size < need) return false;
   }
   return true;
+}
+
+function isVisible(upgrade, lobby, difficulty) {
+  return (
+    isCompatible(upgrade, lobby, difficulty) && requiresMet(upgrade)
+  );
 }
 
 function visibleRows() {
@@ -113,10 +123,11 @@ function visibleRows() {
   const rows = [];
 
   for (const upgrade of state.upgrades) {
-    if (!isVisible(upgrade, lobby, state.difficulty)) continue;
-
+    if (!isCompatible(upgrade, lobby, state.difficulty)) continue;
+    const applicable = requiresMet(upgrade);
     const shops = shopsFromLevel(upgrade.level, state.level);
-    if (shops <= 0) continue;
+    const available = applicable && shops > 0;
+    if (!available && !state.showAll) continue;
 
     const firstBase = effectiveBase(upgrade, lobby, 1, state.difficulty);
     const firstPrice = scaledPrice(
@@ -135,6 +146,7 @@ function visibleRows() {
       category: upgrade.category,
       note: upgrade.note || "",
       shops,
+      available,
       maxStack: maxStack(upgrade),
     });
   }
@@ -267,25 +279,54 @@ function render() {
 
   const tbody = $("list").querySelector("tbody");
   tbody.innerHTML = "";
-  for (const r of rows) {
-    const visibleN = visibleStackCount(r.name, r.maxStack, r.shops);
-    const locked = state.locked[r.name];
-    const pending = state.pending[r.name];
+  for (const row of rows) {
+    if (!row.available) {
+      for (let i = 1; i <= row.maxStack; i++) {
+        const tr = document.createElement("tr");
+        tr.classList.add("unavailable");
+        const base = effectiveBase(row.upgrade, lobby, i, state.difficulty);
+        const price = scaledPrice(base, state.players, lobby, state.difficulty);
+
+        const nameCell = document.createElement("td");
+        const stackLabel = row.maxStack > 1 ? ` [${i}/${row.maxStack}]` : "";
+        nameCell.textContent = row.name + stackLabel;
+
+        const lvlCell = document.createElement("td");
+        lvlCell.className = "num";
+        lvlCell.textContent = row.level;
+
+        const baseCell = document.createElement("td");
+        baseCell.className = "num";
+        baseCell.textContent = base;
+
+        const priceCell = document.createElement("td");
+        priceCell.className = "num";
+        priceCell.textContent = price;
+
+        tr.append(nameCell, lvlCell, baseCell, priceCell);
+        tbody.appendChild(tr);
+      }
+      continue;
+    }
+
+    const visibleN = visibleStackCount(row.name, row.maxStack, row.shops);
+    const locked = state.locked[row.name];
+    const pending = state.pending[row.name];
     for (let i = 1; i <= visibleN; i++) {
       const tr = document.createElement("tr");
       if (locked && locked.has(i)) tr.classList.add("locked");
       else if (pending && pending.has(i)) tr.classList.add("pending");
 
-      const base = effectiveBase(r.upgrade, lobby, i, state.difficulty);
+      const base = effectiveBase(row.upgrade, lobby, i, state.difficulty);
       const price = scaledPrice(base, state.players, lobby, state.difficulty);
 
       const nameCell = document.createElement("td");
-      const stackLabel = r.maxStack > 1 ? ` [${i}/${r.maxStack}]` : "";
-      nameCell.textContent = r.name + stackLabel;
+      const stackLabel = row.maxStack > 1 ? ` [${i}/${row.maxStack}]` : "";
+      nameCell.textContent = row.name + stackLabel;
 
       const lvCell = document.createElement("td");
       lvCell.className = "num";
-      lvCell.textContent = r.level;
+      lvCell.textContent = row.level;
 
       const baseCell = document.createElement("td");
       baseCell.className = "num";
@@ -297,7 +338,7 @@ function render() {
 
       tr.append(nameCell, lvCell, baseCell, priceCell);
       tr.addEventListener("click", () => {
-        clickSlot(r.name, i);
+        clickSlot(row.name, i);
         render();
       });
       tbody.appendChild(tr);
@@ -338,6 +379,10 @@ function bindInputs() {
     state.difficulty = e.target.value;
     render();
   });
+  $("showAll").addEventListener("change", (e) => {
+    state.showAll = e.target.checked;
+    render();
+  });
   $("lock").addEventListener("click", () => {
     lockPending();
     render();
@@ -356,6 +401,7 @@ function resetForm() {
   $("players").max = state.cap;
   $("players").value = state.players;
   $("difficulty").value = state.difficulty;
+  $("showAll").checked = state.showAll;
 }
 
 async function init() {
