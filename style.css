@@ -130,12 +130,14 @@ button:hover {
 .stats {
   display: flex;
   flex-wrap: wrap;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 8px;
   margin: 0.5em 0 1.2em;
 }
 .stat {
+  display: flex;
+  align-items: center;
   background: var(--bg-panel);
   border: 3px solid var(--border-purple);
   border-radius: 3px;
@@ -180,7 +182,7 @@ button:hover {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
   gap: 8px;
   margin: 0.5em 0;
 }
@@ -206,6 +208,12 @@ button:hover {
   font-size: 1.3em;
   text-align: center;
   margin-bottom: 0.4em;
+}
+
+.settings-row .field input[type="number"],
+.settings-row .field .toggle {
+  box-sizing: border-box;
+  height: 36px;
 }
 
 .diff-select {
@@ -237,6 +245,27 @@ button:hover {
   align-items: center;
   gap: 8px;
   width: 280px;
+}
+.number-control {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.number-control input[type="number"] {
+  text-align: center;
+}
+#money,
+#level {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+#money::-webkit-outer-spin-button,
+#money::-webkit-inner-spin-button,
+#level::-webkit-outer-spin-button,
+#level::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 .slider-btn {
   flex: 0 0 auto;

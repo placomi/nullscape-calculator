@@ -102,13 +102,19 @@
         </div>
         <div class="field">
           <div class="field-label">Level</div>
-          <input
-            id="level"
-            type="number"
-            min="0"
-            value="3"
-            autocomplete="off"
-          />
+          <div class="number-control">
+            <button type="button" class="slider-btn" id="levelMinus">
+              &minus;
+            </button>
+            <input
+              id="level"
+              type="number"
+              min="0"
+              value="3"
+              autocomplete="off"
+            />
+            <button type="button" class="slider-btn" id="levelPlus">+</button>
+          </div>
         </div>
         <div class="field">
           <div class="field-label">Gold Gifts</div>

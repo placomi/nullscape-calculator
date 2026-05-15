@@ -12,7 +12,7 @@ const HIDDEN_UPGRADES = new Set(["Real Wings", "Blossom"]);
 
 const state = {
   upgrades: [],
-  level: 1,
+  level: 3,
   money: 0,
   cap: 8,
   players: 1,
@@ -83,6 +83,18 @@ function shopsFromLevel(firstLevel, currentLevel) {
     if (SHOP_ENDINGS.has(l % 10)) n++;
   }
   return n;
+}
+
+function nextShopLevel(level) {
+  let l = level + 1;
+  while (!SHOP_ENDINGS.has(l % 10)) l++;
+  return l;
+}
+
+function prevShopLevel(level) {
+  let l = level - 1;
+  while (l > 0 && !SHOP_ENDINGS.has(l % 10)) l--;
+  return Math.max(0, l);
 }
 
 function maxStack(upgrade) {
@@ -376,10 +388,41 @@ function render() {
 }
 
 function bindInputs() {
-  $("level").addEventListener("input", (e) => {
-    state.level = Math.max(0, parseInt(e.target.value || "0", 10));
-    render();
+  let levelTyped = false;
+  $("level").addEventListener("keydown", (e) => {
+    if (e.key === "ArrowUp" || e.key === "ArrowDown") {
+      e.preventDefault();
+      setLevel(
+        e.key === "ArrowUp"
+          ? nextShopLevel(state.level)
+          : prevShopLevel(state.level),
+      );
+      return;
+    }
+    levelTyped = true;
+    setTimeout(() => {
+      levelTyped = false;
+    }, 0);
   });
+  $("level").addEventListener("input", (e) => {
+    const raw = Math.max(0, parseInt(e.target.value || "0", 10) || 0);
+    if (levelTyped) {
+      state.level = raw;
+      render();
+      return;
+    }
+    setLevel(
+      raw > state.level
+        ? nextShopLevel(state.level)
+        : prevShopLevel(state.level),
+    );
+  });
+  $("levelMinus").addEventListener("click", () =>
+    setLevel(prevShopLevel(state.level)),
+  );
+  $("levelPlus").addEventListener("click", () =>
+    setLevel(nextShopLevel(state.level)),
+  );
   $("money").addEventListener("input", (e) => {
     state.money = Math.max(0, parseInt(e.target.value || "0", 10));
     render();
@@ -449,6 +492,12 @@ function setPlayers(v) {
   state.players = Math.max(1, Math.min(state.cap, v || 1));
   $("players").value = state.players;
   updatePlayersReadout();
+  render();
+}
+
+function setLevel(v) {
+  state.level = Math.max(0, v);
+  $("level").value = state.level;
   render();
 }
 
