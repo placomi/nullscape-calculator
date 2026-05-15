@@ -462,6 +462,14 @@ input[type="range"]::-moz-range-track {
   border-color: var(--green);
   box-shadow: 0 0 8px rgba(44, 180, 145, 0.5);
 }
+.tile.unaffordable {
+  background: linear-gradient(#5a1410, #200705);
+  border-color: #fd7865;
+  box-shadow: 0 0 8px rgba(253, 120, 101, 0.5);
+}
+.tile.unaffordable .price {
+  color: #fd7865;
+}
 .tile.unavailable {
   opacity: 0.4;
   cursor: default;

@@ -321,7 +321,7 @@ function renderObtained(lobby) {
   }
 }
 
-function renderShop(lobby) {
+function renderShop(lobby, remaining) {
   const grid = $("shop");
   grid.innerHTML = "";
 
@@ -337,6 +337,7 @@ function renderShop(lobby) {
     const base = effectiveBase(upgrade, lobby, idx, state.difficulty);
     const price = scaledPrice(base, state.players, lobby, state.difficulty);
     const selected = state.selected.has(upgrade.name);
+    const unaffordable = !selected && price > remaining;
     const row = {
       upgrade,
       name: upgrade.name,
@@ -347,7 +348,7 @@ function renderShop(lobby) {
     grid.appendChild(
       buildTile(row, {
         slot: "shop",
-        stateClass: selected ? "pending" : null,
+        stateClass: selected ? "pending" : unaffordable ? "unaffordable" : null,
         price,
         title: `${upgrade.name}\n\n${upgrade.description || ""}`,
         onClick: () => {
@@ -371,7 +372,7 @@ function render() {
   $("cost").textContent = `Cost: ${cost}`;
 
   renderObtained(lobby);
-  renderShop(lobby);
+  renderShop(lobby, remaining);
 }
 
 function bindInputs() {
