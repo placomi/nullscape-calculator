@@ -40,14 +40,6 @@ function scaledPrice(base, players, lobby, difficulty) {
 
 function effectiveBase(upgrade, lobby, stackIndex, difficulty) {
   if (
-    difficulty === "Casual" &&
-    Array.isArray(upgrade.casual_stack_prices) &&
-    stackIndex >= 1 &&
-    stackIndex <= upgrade.casual_stack_prices.length
-  ) {
-    return upgrade.casual_stack_prices[stackIndex - 1];
-  }
-  if (
     lobby === "Solo" &&
     Array.isArray(upgrade.solo_stack_prices) &&
     stackIndex >= 1 &&
@@ -56,20 +48,28 @@ function effectiveBase(upgrade, lobby, stackIndex, difficulty) {
     return upgrade.solo_stack_prices[stackIndex - 1];
   }
   if (
+    difficulty === "Casual" &&
+    Array.isArray(upgrade.casual_stack_prices) &&
+    stackIndex >= 1 &&
+    stackIndex <= upgrade.casual_stack_prices.length
+  ) {
+    return upgrade.casual_stack_prices[stackIndex - 1];
+  }
+  if (
     Array.isArray(upgrade.stack_prices) &&
     stackIndex >= 1 &&
     stackIndex <= upgrade.stack_prices.length
   ) {
     return upgrade.stack_prices[stackIndex - 1];
   }
+  if (lobby === "Solo" && typeof upgrade.solo_base_price === "number") {
+    return upgrade.solo_base_price;
+  }
   if (
     difficulty === "Casual" &&
     typeof upgrade.casual_base_price === "number"
   ) {
     return upgrade.casual_base_price;
-  }
-  if (lobby === "Solo" && typeof upgrade.solo_base_price === "number") {
-    return upgrade.solo_base_price;
   }
   return upgrade.base_price;
 }
