@@ -1,70 +1,148 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <title>Nullscape Upgrade Calculator</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-</head>
-<body>
-  <h2>Nullscape Upgrade Calculator</h2>
-  <h4>How to use</h4>
-  <ol>
-  	<li>Set your lobby's player cap and difficulty.</li>
-  	<li>Every shop, set your current level, the current number of players, and how many golden gifts you have.</li>
-	<li>Select the upgrades you would like.</li>
-	<li>After purchasing, you can hit "Set obtained upgrades". These upgrades will no longer count towards the cost.</li>
-  </ol>
-  <p>Prices are based on the incomplete <a href="https://nullscape.wiki/">Nullscape wiki</a>, so there may be some inaccuracies.</p>
-  <p>meow mrrp meowwwwww meow</p>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nullscape Upgrade Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  </head>
+  <body>
+    <div class="page">
+      <h2>Nullscape Upgrade Calculator</h2>
+      <h3>How to use</h3>
+      <ol>
+        <li>Set your lobby's player cap and difficulty.</li>
+        <li>
+          Every shop, set your current level, the current number of players, and
+          how many golden gifts you have. If you have the "Nothing?" curse,
+          select that as well.
+        </li>
+        <li>
+          If you are starting in the middle of a game, select your currently
+          obtained upgrades.
+        </li>
+        <li>In the Current Shop, select the upgrades you want to buy.</li>
+        <li>When you are ready to buy, hit "Buy selected".</li>
+      </ol>
+      <p>
+        Prices are based on the incomplete
+        <a href="https://nullscape.wiki/">Nullscape wiki</a>, so there may be
+        some inaccuracies. If you find any errors, please message @placom on
+        discord.
+      </p>
+      <p>meow mrrp meowwwwww meow</p>
 
-  <form autocomplete="off" onsubmit="return false">
-  <h3>Initial settings</h3>
-  <p>
-    Player cap: <input id="cap" type="number" min="1" max="20" value="1" autocomplete="off">
-    Difficulty:
-    <select id="difficulty" autocomplete="off">
-      <option>Casual</option>
-      <option selected>Normal</option>
-      <option>Extreme</option>
-    </select>
-  </p>
+      <button id="meow" type="button">meow</button>
 
-  <h3>Run state</h3>
-  <p>
-    Level: <input id="level" type="number" min="0" value="1" autocomplete="off">
-    Current players: <input id="players" type="number" min="1" max="20" value="1" autocomplete="off">
-    Gold Gifts: <input id="money" type="number" min="0" value="0" autocomplete="off">
-  </p>
-  </form>
+      <h3>Settings</h3>
+      <div class="settings-row">
+        <div class="field">
+          <div class="field-label">Difficulty</div>
+          <div id="difficulty" class="diff-select">
+            <div class="diff-option" data-value="Casual">Casual</div>
+            <div class="diff-option selected" data-value="Standard">
+              Standard
+            </div>
+            <div class="diff-option" data-value="Extreme">Extreme</div>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Player Cap</div>
+          <div class="slider-control">
+            <button type="button" class="slider-btn" id="capMinus">
+              &minus;
+            </button>
+            <input
+              id="cap"
+              type="range"
+              min="1"
+              max="20"
+              value="8"
+              autocomplete="off"
+            />
+            <button type="button" class="slider-btn" id="capPlus">+</button>
+          </div>
+          <div class="slider-readout">
+            <span id="capValue" class="slider-value">1</span>
+          </div>
+        </div>
+      </div>
 
-  <p>
-    <button id="lock" type="button">Set obtained upgrades</button>
-    <button id="clear" type="button">Clear all selections</button>
-    <button id="reset" type="button">Reset run</button>
-    <label><input id="showAll" type="checkbox" autocomplete="off"> Show all upgrades</label>
-  </p>
+      <h3>Obtained Upgrades</h3>
+      <p class="controls">
+        <button id="clearObtained" type="button">Clear upgrades</button>
+        <label class="toggle">
+          <input id="showAll" type="checkbox" autocomplete="off" />
+          Show all upgrades
+        </label>
+      </p>
+      <div id="obtained" class="grid"></div>
 
-  <p id="lobby"></p>
-  <p id="status"></p>
+      <h3>Current Shop</h3>
+      <div class="settings-row">
+        <div class="field">
+          <div class="field-label">Current Players</div>
+          <div class="slider-control">
+            <button type="button" class="slider-btn" id="playersMinus">
+              &minus;
+            </button>
+            <input
+              id="players"
+              type="range"
+              min="1"
+              max="20"
+              value="1"
+              autocomplete="off"
+            />
+            <button type="button" class="slider-btn" id="playersPlus">+</button>
+          </div>
+          <div class="slider-readout">
+            <span id="playersValue" class="slider-value">1</span>
+          </div>
+        </div>
+        <div class="field">
+          <div class="field-label">Level</div>
+          <input
+            id="level"
+            type="number"
+            min="0"
+            value="1"
+            autocomplete="off"
+          />
+        </div>
+        <div class="field">
+          <div class="field-label">Gold Gifts</div>
+          <input
+            id="money"
+            type="number"
+            min="0"
+            value="0"
+            autocomplete="off"
+          />
+        </div>
+        <div class="field">
+          <div class="field-label">&nbsp;</div>
+          <label class="toggle" title="Nothing? curse: shops are 15% cheaper">
+            <input id="nothing" type="checkbox" autocomplete="off" />
+            <img
+              src="https://static.wikitide.net/nullscapewiki/a/a9/Nothing%3F.png"
+              alt="Nothing?"
+            />
+            Nothing?
+          </label>
+        </div>
+      </div>
 
-  <h3>Upgrades</h3>
-  <table id="list">
-    <thead>
-      <tr>
-        <th>Upgrade</th>
-        <th>Level</th>
-        <th>Base</th>
-        <th>Price</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
+      <div class="stats">
+        <button id="lock" type="button">Buy selected</button>
+        <button id="clear" type="button">Clear selection</button>
+        <span id="budget" class="stat"></span>
+        <span id="cost" class="stat"></span>
+      </div>
 
-  <p style="font-size: 0.8em;">If you find any errors please submit an issue here:
-  <a>https://github.com/placomi/nullscape-calculator/issues</a>
-  </p>
+      <div id="shop" class="grid"></div>
+    </div>
 
-  <script src="app.js"></script>
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>

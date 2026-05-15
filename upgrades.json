@@ -3,13 +3,17 @@
 		{
 			"name": "Better Jump Pads",
 			"level": 5,
-			"base_price": 50
+			"base_price": 50,
+			"image": "1/1c/BetterJumpPads.png",
+			"description": "More Jump Pads with less random positions."
 		},
 		{
 			"name": "Paycheck",
 			"level": 3,
 			"base_price": 55,
-			"max_stack": 5
+			"max_stack": 5,
+			"image": "a/a9/Paycheck.png",
+			"description": "Gain ﹢40 (﹢10 per beaconed player) Golden Gifts every round if half or more of the players survive."
 		},
 		{
 			"name": "Business License",
@@ -19,38 +23,52 @@
 			"stack_prices": [
 				75,
 				187.5
-			]
+			],
+			"image": "9/97/BusinessLicense.png",
+			"description": "﹢25% Golden Gift yield. (Max 50%)"
 		},
 		{
 			"name": "Swiftness Ring",
 			"level": 3,
 			"base_price": 80,
-			"max_stack": 3
+			"max_stack": 3,
+			"image": "8/80/SwiftnessRing.png",
+			"description": "﹢10% Movement speed (Max 30%)."
 		},
 		{
 			"name": "Grapple Points",
 			"level": 5,
-			"base_price": 100
+			"base_price": 100,
+			"image": "c/ca/GrapplePoints.png",
+			"description": "Harder to reach Jump Pads that are smaller, with a more powerful boost."
 		},
 		{
 			"name": "Medal",
 			"level": 5,
-			"base_price": 100
+			"base_price": 100,
+			"image": "b/b7/Medal.png",
+			"description": "On Collapse and on odd levels, the Medal spawns, bring it to the beacon for Golden Gifts and the option to pick a difficult curse for Golden Gifts. Choosing to pick a difficult curse increases future Golden Gifts rewards. Carrying it gives an extra double jump but disables abilities."
 		},
 		{
 			"name": "Tria Orbs",
 			"level": 5,
-			"base_price": 100
+			"base_price": 100,
+			"image": "f/f7/TriaOrbs.png",
+			"description": "Makes Orbs appear around the map, Orbs boost you after jumping out of them."
 		},
 		{
 			"name": "Double Jump",
 			"level": 5,
-			"base_price": 150
+			"base_price": 150,
+			"image": "0/01/DoubleJump.png",
+			"description": "Allows you to double jump."
 		},
 		{
 			"name": "Radar",
 			"level": 5,
-			"base_price": 175
+			"base_price": 175,
+			"image": "4/46/Radar.png",
+			"description": "Arrow always appears and highlights all nearby gifts."
 		},
 		{
 			"name": "Radar Module: Enemies",
@@ -58,18 +76,24 @@
 			"base_price": 200,
 			"requires": [
 				"Radar"
-			]
+			],
+			"image": "b/bd/RadarModuleEnemies.png",
+			"description": "Tracks enemies through walls."
 		},
 		{
 			"name": "Fanny Pack",
 			"level": 8,
-			"base_price": 300
+			"base_price": 300,
+			"image": "f/f7/FannyPack.png",
+			"description": "During collapse, some tiles turn yellow. Collecting all gifts from these tiles gives bonus Golden Gifts."
 		},
 		{
 			"name": "Grace Wings",
 			"level": 8,
 			"base_price": 300,
-			"solo_base_price": 200
+			"solo_base_price": 200,
+			"image": "5/5d/GraceWings.png",
+			"description": "Greatly enhances air control."
 		},
 		{
 			"name": "Pocket Bell",
@@ -77,7 +101,9 @@
 			"base_price": 300,
 			"requires": [
 				"Double Jump"
-			]
+			],
+			"image": "1/13/Pocket_Bell.png",
+			"description": "An extra double jump."
 		},
 		{
 			"name": "Radar Module: Altars",
@@ -85,28 +111,38 @@
 			"base_price": 300,
 			"requires": [
 				"Radar"
-			]
+			],
+			"image": "a/af/RadarModuleAltars.png",
+			"description": "Marks the location of all unused altars every 12 seconds."
 		},
 		{
 			"name": "Ice Skates",
 			"level": 8,
 			"base_price": 400,
-			"solo_base_price": 300
+			"solo_base_price": 300,
+			"image": "d/d1/IceSkates.png",
+			"description": "Less slipping on ice. Going in one direction for a while slowly gives a speed boost."
 		},
 		{
 			"name": "Helmet",
 			"level": 8,
-			"base_price": 400
+			"base_price": 400,
+			"image": "3/37/Helmet.png",
+			"description": "Bonking sends you upwards and allows full control."
 		},
 		{
 			"name": "Advanced Gravity Coil",
 			"level": 8,
-			"base_price": 600
+			"base_price": 600,
+			"image": "4/43/AdvancedGravityCoil.png",
+			"description": "25% Increased maximum jump height. Controllable jump height. Hold space to jump higher, tap space to jump lightly."
 		},
 		{
 			"name": "More Altars",
 			"level": 10,
-			"base_price": 600
+			"base_price": 600,
+			"image": "6/61/MoreAltars.png",
+			"description": "Spawns an extra Altar."
 		},
 		{
 			"name": "Larger Grapple Points",
@@ -114,14 +150,18 @@
 			"base_price": 500,
 			"requires": [
 				"Grapple Points"
-			]
+			],
+			"image": "3/3a/LargerGrapplePoints.png",
+			"description": "Grapple Points are 25% larger."
 		},
 		{
 			"name": "Ninja Belt",
 			"level": 13,
 			"base_price": 700,
 			"solo_base_price": 500,
-			"casual_base_price": 500
+			"casual_base_price": 500,
+			"image": "5/59/NinjaBelt.png",
+			"description": "Gives the player an alternate ability according their class."
 		},
 		{
 			"name": "Radar Module: Instruments",
@@ -129,19 +169,25 @@
 			"base_price": 1000,
 			"requires": [
 				"Radar"
-			]
+			],
+			"image": "9/9a/RadarModuleInstruments.png",
+			"description": "Marks the location of Cadence's instruments every 12 seconds and gives you an arrow pointing towards instruments."
 		},
 		{
 			"name": "Shark Tail",
 			"level": 15,
 			"base_price": 1200,
-			"casual_base_price": 800
+			"casual_base_price": 800,
+			"image": "5/50/SharkTail.png",
+			"description": "Gives the player conversion to vertical movement according to their class."
 		},
 		{
 			"name": "Sport Shoes",
 			"level": 15,
 			"base_price": 1350,
-			"casual_base_price": 1000
+			"casual_base_price": 1000,
+			"image": "2/2f/SportShoes.png",
+			"description": "﹢40% Movement speed."
 		},
 		{
 			"name": "Gift Magnet",
@@ -157,20 +203,26 @@
 				750,
 				1050,
 				1350
-			]
+			],
+			"image": "f/f0/GiftMagnet.png",
+			"description": "Increases pickup range by .5 studs. (Max 1.5 studs)"
 		},
 		{
 			"name": "Matrix Tetrahedron",
 			"level": 15,
 			"base_price": 2500,
-			"casual_base_price": 1500
+			"casual_base_price": 1500,
+			"image": "b/b6/MatrixTetrahedron.png",
+			"description": "Instant Acceleration. Completely Removes the slippery/icey movement."
 		},
 		{
 			"name": "Shield",
 			"level": 15,
 			"base_price": 4000,
 			"solo_base_price": 1000,
-			"casual_base_price": 2000
+			"casual_base_price": 2000,
+			"image": "c/cf/Shield.png",
+			"description": "Allows you to take an extra hit. Doesn't protect you from the Void."
 		},
 		{
 			"name": "Panic Necklace",
@@ -179,13 +231,17 @@
 			"casual_base_price": 1500,
 			"requires": [
 				"Shield"
-			]
+			],
+			"image": "1/1f/PanicNecklace.png",
+			"description": "When your last shield breaks, gain debuff immunity, movement speed and ﹢2 pickup range for 40 seconds."
 		},
 		{
 			"name": "Miniature Hourglass",
 			"level": 20,
 			"base_price": 3000,
-			"casual_base_price": 1500
+			"casual_base_price": 1500,
+			"image": "d/dd/MiniatureHourglass.png",
+			"description": "Gives the player a unique passive according to their class."
 		},
 		{
 			"name": "Gift Idol",
@@ -205,7 +261,9 @@
 				9000,
 				12000,
 				15000
-			]
+			],
+			"image": "8/81/GiftIdol.png",
+			"description": "Collecting gifts has a ﹢1% chance to collect nearby gifts. (Max 5%)"
 		},
 		{
 			"name": "Drowned Ægis",
@@ -214,7 +272,9 @@
 			"casual_base_price": 4000,
 			"requires": [
 				"More Altars"
-			]
+			],
+			"image": "b/be/Drowned%C3%86gis.png",
+			"description": "Altar of Protection also gives a one time Void shield that teleports you out of the Void."
 		}
 	],
 	"exclusive": [
@@ -222,19 +282,25 @@
 			"name": "Orb",
 			"level": 0,
 			"base_price": 0,
-			"note": "Free; Casual difficulty replacement for Tripmine upgrades"
+			"note": "Free; Casual difficulty replacement for Tripmine upgrades",
+			"image": "9/96/Orb.png",
+			"description": "Enhances your abilities."
 		},
 		{
 			"name": "Adrenaline",
 			"level": 3,
 			"base_price": 50,
-			"note": "Replaces Last Robloxian Standing in Solo/Duo"
+			"note": "Replaces Last Robloxian Standing in Solo/Duo",
+			"image": "e/e3/Adrenaline.png",
+			"description": "﹢20% Movement speed."
 		},
 		{
 			"name": "Defuse Kit",
 			"level": 5,
 			"base_price": 30,
-			"max_stack": 3
+			"max_stack": 3,
+			"image": "1/13/DefuseKit.png",
+			"description": "﹢20% Chance for Tripmines to not explode. (Max 60%)"
 		},
 		{
 			"name": "Radar Module: Players",
@@ -242,12 +308,16 @@
 			"base_price": 150,
 			"requires": [
 				"Radar"
-			]
+			],
+			"image": "0/08/RadarModulePlayers.png",
+			"description": "Highlights other players every 12 seconds."
 		},
 		{
 			"name": "Last Robloxian Standing",
 			"level": 8,
-			"base_price": 300
+			"base_price": 300,
+			"image": "f/f2/LastRobloxianStanding.png",
+			"description": "Gain a movement speed boost, 4 seconds of invincibility, and a shield when you are the last one alive."
 		},
 		{
 			"name": "Radar Module: Tripmines",
@@ -255,7 +325,9 @@
 			"base_price": 400,
 			"requires": [
 				"Radar"
-			]
+			],
+			"image": "1/14/RadarModuleTripmines.png",
+			"description": "Highlights all nearby Tripmines."
 		},
 		{
 			"name": "Subspacial Barrier",
@@ -275,7 +347,9 @@
 					"name": "Defuse Kit",
 					"count": 3
 				}
-			]
+			],
+			"image": "0/02/SubspacialBarrier.png",
+			"description": "Allows you take an extra hit from Tripmines and Void Implosions."
 		}
 	]
 }
