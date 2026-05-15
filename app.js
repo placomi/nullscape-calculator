@@ -8,6 +8,8 @@ const TRIPMINE_RELATED = new Set([
 
 const SHOP_ENDINGS = new Set([0, 3, 5, 8]);
 
+const HIDDEN_UPGRADES = new Set(["Real Wings", "Blossom"]);
+
 const state = {
   upgrades: [],
   level: 1,
@@ -516,7 +518,46 @@ async function fetchWikiDescriptions() {
     }
     if (changed) render();
   } catch (e) {
-    // wiki unreachable — keep the bundled descriptions
+  }
+}
+
+function applyWikiPrice(upgrade, price) {
+  if (price === undefined || price === null) return;
+  if (typeof price === "number") {
+    upgrade.base_price = Math.max(0, price);
+    return;
+  }
+  if (typeof price !== "object") return;
+  if (typeof price.normal === "number") upgrade.base_price = price.normal;
+  if (typeof price.solo === "number") upgrade.solo_base_price = price.solo;
+  if (typeof price.casual === "number") upgrade.casual_base_price = price.casual;
+  if (Array.isArray(price.stack)) upgrade.stack_prices = price.stack;
+  if (Array.isArray(price["stack-solo"]))
+    upgrade.solo_stack_prices = price["stack-solo"];
+  if (Array.isArray(price["stack-casual"]))
+    upgrade.casual_stack_prices = price["stack-casual"];
+}
+
+async function fetchWikiPrices() {
+  try {
+    const url =
+      "https://nullscape.wiki/w/api.php?action=query&format=json" +
+      "&formatversion=2&prop=revisions&rvprop=content&rvslots=main" +
+      "&titles=Module:GameData/Upgrades.json&origin=*";
+    const res = await fetch(url);
+    const data = await res.json();
+    const content = data.query.pages[0].revisions[0].slots.main.content;
+    const wiki = JSON.parse(content);
+
+    const byName = {};
+    for (const entry of Object.values(wiki)) byName[entry.name] = entry;
+
+    for (const upgrade of state.upgrades) {
+      const entry = byName[upgrade.name];
+      if (entry) applyWikiPrice(upgrade, entry.price);
+    }
+    render();
+  } catch (e) {
   }
 }
 
@@ -527,10 +568,11 @@ async function init() {
   state.upgrades = [
     ...data.in_game.map((u) => ({ ...u, category: "in_game" })),
     ...data.exclusive.map((u) => ({ ...u, category: "exclusive" })),
-  ];
+  ].filter((u) => !HIDDEN_UPGRADES.has(u.name));
   resetForm();
   bindInputs();
   render();
+  fetchWikiPrices();
   fetchWikiDescriptions();
 }
 
