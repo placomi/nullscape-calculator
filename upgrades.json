@@ -262,6 +262,9 @@
 				12000,
 				15000
 			],
+			"requires": [
+				"Gift Magnet"
+			],
 			"image": "8/81/GiftIdol.png",
 			"description": "Collecting gifts has a ﹢1% chance to collect nearby gifts. (Max 5%)"
 		},
