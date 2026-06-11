@@ -21,6 +21,7 @@ const state = {
   selected: new Set(),
   showAll: true,
   nothing: false,
+  autoAdvance: true,
 };
 
 const $ = (id) => document.getElementById(id);
@@ -457,8 +458,12 @@ function bindInputs() {
     state.nothing = e.target.checked;
     render();
   });
+  $("autoAdvance").addEventListener("change", (e) => {
+    state.autoAdvance = e.target.checked;
+  });
   $("lock").addEventListener("click", () => {
     buySelected();
+    if (state.autoAdvance) setLevel(nextShopLevel(state.level));
     render();
   });
   $("clear").addEventListener("click", () => {
@@ -531,6 +536,7 @@ function resetForm() {
   $("players").value = state.players;
   $("showAll").checked = state.showAll;
   $("nothing").checked = state.nothing;
+  $("autoAdvance").checked = state.autoAdvance;
   updateCapReadout();
   updatePlayersReadout();
   updateDiffSelection();
