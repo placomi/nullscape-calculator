@@ -460,6 +460,7 @@ function bindInputs() {
   });
   $("autoAdvance").addEventListener("change", (e) => {
     state.autoAdvance = e.target.checked;
+    localStorage.setItem("autoAdvance", state.autoAdvance);
   });
   $("lock").addEventListener("click", () => {
     buySelected();
@@ -626,6 +627,8 @@ async function init() {
     ...data.in_game.map((u) => ({ ...u, category: "in_game" })),
     ...data.exclusive.map((u) => ({ ...u, category: "exclusive" })),
   ].filter((u) => !HIDDEN_UPGRADES.has(u.name));
+  const stored = localStorage.getItem("autoAdvance");
+  if (stored !== null) state.autoAdvance = stored === "true";
   resetForm();
   bindInputs();
   render();
