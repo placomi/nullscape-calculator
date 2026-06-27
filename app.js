@@ -127,11 +127,14 @@ function isCompatible(upgrade, lobby, difficulty) {
   return true;
 }
 
-function requiresMet(upgrade) {
+function requiresMet(upgrade, lobby) {
   if (!Array.isArray(upgrade.requires)) return true;
   for (const dep of upgrade.requires) {
     const depName = typeof dep === "string" ? dep : dep.name;
     const need = typeof dep === "string" ? 1 : dep.count || 1;
+    const depUpgrade = state.upgrades.find((u) => u.name === depName);
+    if (depUpgrade && !isCompatible(depUpgrade, lobby, state.difficulty))
+      continue;
     if ((state.obtained[depName] || 0) < need) return false;
   }
   return true;
@@ -144,7 +147,7 @@ function ownedCount(upgrade, lobby) {
 function isAvailable(upgrade, lobby) {
   return (
     isCompatible(upgrade, lobby, state.difficulty) &&
-    requiresMet(upgrade) &&
+    requiresMet(upgrade, lobby) &&
     shopsFromLevel(upgrade.level, state.level) > 0
   );
 }
