@@ -1,2 +1,2 @@
-in party or party+ lobby, need more than 2 players for player esp
-in duos it shows up ?
+player esp available in duos and party/party+
+subspacial barrier available in casual

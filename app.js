@@ -3,7 +3,6 @@
 const TRIPMINE_RELATED = new Set([
   "Defuse Kit",
   "Radar Module: Tripmines",
-  "Subspacial Barrier",
 ]);
 
 const SHOP_ENDINGS = new Set([0, 3, 5, 8]);
@@ -123,7 +122,7 @@ function isCompatible(upgrade, lobby, difficulty) {
     return false;
   const soloOrDuo = lobby === "Solo" || lobby === "Duo";
   if (soloOrDuo && upgrade.name === "Last Robloxian Standing") return false;
-  if (soloOrDuo && upgrade.name === "Radar Module: Players") return false;
+  if (lobby === "Solo" && upgrade.name === "Radar Module: Players") return false;
   if (!soloOrDuo && upgrade.name === "Adrenaline") return false;
   return true;
 }
